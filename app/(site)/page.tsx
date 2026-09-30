@@ -1,4 +1,9 @@
-// Temporary: a blue band so the navbar is visible until the hero is built.
+import { Hero } from "./_components/hero";
+
 export default function Home() {
-  return <main id="main" tabIndex={-1} className="min-h-[200vh] bg-grid" />;
+  return (
+    <main id="main" tabIndex={-1}>
+      <Hero />
+    </main>
+  );
 }
