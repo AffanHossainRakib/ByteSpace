@@ -1,26 +1,308 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Class-based dark variant: the design has no dark mode, so shadcn's dark: styles stay off even when the OS is dark. */
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-gray-50: #f5f5f6;
+  --color-gray-100: #e5e6e8;
+  --color-gray-200: #ced0d3;
+  --color-gray-300: #abaeb5;
+  --color-gray-400: #82868e;
+  --color-gray-500: #666973;
+  --color-gray-600: #585a62;
+  --color-gray-700: #4b4c53;
+  --color-gray-800: #424348;
+  --color-gray-900: #3a3b3f;
+  --color-gray-950: #242528;
+
+  --color-blue-50: #e7f6ff;
+  --color-blue-100: #d3eeff;
+  --color-blue-200: #b0ddff;
+  --color-blue-300: #81c5ff;
+  --color-blue-400: #4f9dff;
+  --color-blue-500: #2872ff;
+  --color-blue-600: #0445ff;
+  --color-blue-700: #0043ff;
+  --color-blue-800: #003be2;
+  --color-blue-900: #0b36a4;
+  --color-blue-950: #071e5f;
+
+  --color-lime-50: #fdffe4;
+  --color-lime-100: #faffc5;
+  --color-lime-200: #f2ff92;
+  --color-lime-300: #e4ff54;
+  --color-lime-400: #d4fb20;
+  --color-lime-500: #cbfc01;
+  --color-lime-600: #8cb400;
+  --color-lime-700: #6a8902;
+  --color-lime-800: #546b09;
+  --color-lime-900: #465a0d;
+  --color-lime-950: #243300;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+
+  --shadow-float:
+    0 1px 3px rgb(0 0 0 / 0.04), 0 8px 10px rgb(0 0 0 / 0.07),
+    0 24px 24px rgb(0 0 0 / 0.09), 0 72px 72px rgb(0 0 0 / 0.13);
 }
 
 @theme inline {
+  --font-sans: var(--font-satoshi);
+  --font-heading: var(--font-poppins);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #ffffff;
+  --foreground: var(--color-gray-950);
+  --card: #ffffff;
+  --card-foreground: var(--color-gray-950);
+  --popover: #ffffff;
+  --popover-foreground: var(--color-gray-950);
+  --primary: var(--color-lime-400);
+  --primary-foreground: var(--color-gray-950);
+  --secondary: var(--color-gray-50);
+  --secondary-foreground: var(--color-gray-950);
+  --muted: var(--color-gray-50);
+  --muted-foreground: var(--color-gray-400);
+  --accent: var(--color-gray-50);
+  --accent-foreground: var(--color-gray-950);
+  --destructive: #dc2626;
+  --border: var(--color-gray-200);
+  --input: var(--color-gray-200);
+  --ring: var(--color-blue-800);
+
+  /* Page side padding: 16 mobile, 32 tablet, 40 desktop. Content caps at 1200px. */
+  --gutter: 1rem;
+  @media (width >= 48rem) {
+    --gutter: 2rem;
+  }
+  @media (width >= 64rem) {
+    --gutter: 2.5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility container-page {
+  width: 100%;
+  max-width: calc(75rem + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Keyboard focus for links on blue: the default blue ring would be invisible there. */
+@utility focus-on-blue {
+  &:focus-visible {
+    outline: 2px solid var(--color-lime-400);
+    outline-offset: 4px;
+  }
+}
+
+/*
+ * Scroll-in: fades and lifts an element as it enters the viewport. Pure CSS (scroll-driven
+ * animation), so browsers without support, or users who prefer reduced motion, simply see
+ * the content with no animation and nothing is ever hidden.
+ */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@utility reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+/* Horizontal scrollers (pill rows, swipeable cards) without a visible scrollbar. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Blue band with the Figma grid: 2px white lines at 12% every 120px, aligned so a line hits x=120 at 1440. */
+@utility bg-grid {
+  background-color: var(--color-blue-800);
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.12) 2px, transparent 2px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.12) 2px, transparent 2px);
+  background-size: 120px 120px;
+  background-position: -1px -1px;
+}
+
+/*
+ * Type scale. Named type-* rather than text-* so cn() never confuses a size
+ * with a text color. Headings are Poppins; body and labels are Satoshi (default).
+ */
+@utility type-heading-l {
+  font-family: var(--font-heading);
+  font-size: 4.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+@utility type-heading-m {
+  font-family: var(--font-heading);
+  font-size: 2.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+@utility type-heading-s {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+@utility type-heading-xs {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+/* Responsive section title: Heading S on phones, Heading M from tablet up. */
+@utility type-title {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  @media (width >= 48rem) {
+    font-size: 2.75rem;
+  }
+}
+/* Page hero title: like type-title, growing to Heading L on desktop. */
+@utility type-hero {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  @media (width >= 48rem) {
+    font-size: 2.75rem;
+  }
+  @media (width >= 64rem) {
+    font-size: 4.5rem;
+  }
+}
+@utility type-display-s {
+  font-family: var(--font-heading);
+  font-size: 2.75rem;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+@utility type-display-xs {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+@utility type-body-l {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+@utility type-body-m {
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+@utility type-body-s {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+@utility type-body-xs {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+@utility type-label-xl {
+  font-size: 1.25rem;
+  line-height: 1.2;
+  font-weight: 500;
+}
+@utility type-label-l {
+  font-size: 1.125rem;
+  line-height: 1.2;
+  font-weight: 500;
+}
+@utility type-label-m {
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 500;
+}
+@utility type-label-s {
+  font-size: 0.875rem;
+  line-height: 1.2;
+  font-weight: 500;
+}
+@utility type-label-xs {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    /* In-page anchors clear the fixed navbar (80px). */
+    scroll-padding-top: 6rem;
+  }
+  /* Smooth in-page scrolling; Next turns it off during route changes (data-scroll-behavior on <html>). */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
 }
