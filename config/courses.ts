@@ -16,7 +16,13 @@ export const categories = [
   "Web Development",
   "Data Science",
   "Cooking",
+  "Design",
+  "Development",
+  "IT & Software",
+  "Business",
 ] as const;
+
+export const levels = ["Beginner", "Intermediate", "Advanced"] as const;
 
 export const slugify = (s: string) =>
   s
@@ -38,6 +44,7 @@ export type Course = {
   students: string[];
   studentCount: string;
   price: number;
+  order: number;
 };
 
 const bases = [
@@ -79,22 +86,22 @@ const bases = [
   },
 ];
 
-export const courses: Course[] = Array.from({ length: 36 }, (_, i) => {
+export const courses: Course[] = Array.from({ length: 90 }, (_, i) => {
   const base = bases[i % bases.length];
+  const round = Math.floor(i / bases.length);
   return {
     ...base,
-    slug:
-      i < bases.length
-        ? base.slug
-        : `${base.slug}-${Math.floor(i / bases.length) + 1}`,
+    category: round === 0 ? base.category : categories[i % categories.length],
+    slug: round === 0 ? base.slug : `${base.slug}-${round + 1}`,
     creator: "purepearl studio",
     lessons: 17,
     duration: "2 hours 16 mins",
     comments: 59,
-    rating: 4.5,
-    level: "Beginner",
+    rating: round === 0 ? 4.5 : Math.round((4 + ((i * 7) % 11) / 10) * 10) / 10,
+    level: round === 0 ? "Beginner" : levels[i % 3],
     students: [2, 8, 9, 10].map((n) => `/images/avatars/avatar-${n}.png`),
     studentCount: "26+",
-    price: 25,
+    price: round === 0 ? 25 : 15 + ((i * 13) % 8) * 5,
+    order: i,
   };
 });

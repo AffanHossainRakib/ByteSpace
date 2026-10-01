@@ -9,7 +9,7 @@ const columns = [
       { href: "/courses?filter=featured", label: "Featured Courses" },
       { href: "/courses?filter=categories", label: "Featured Categories" },
       { href: "/courses?category=business", label: "Business" },
-      { href: "/courses?category=it", label: "IT" },
+      { href: "/courses?category=it-software", label: "IT" },
       { href: "/courses?category=design", label: "Design" },
     ],
   },

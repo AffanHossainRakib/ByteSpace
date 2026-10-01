@@ -45,7 +45,6 @@ export function LearningPaths() {
             <li key={slug} className="reveal">
               <Link
                 href={`/courses?category=${slug}`}
-                prefetch={false}
                 className="flex aspect-square flex-col items-center justify-center gap-3 rounded-3xl border border-gray-200 bg-white p-4 text-center transition-colors hover:border-lime-400 hover:bg-lime-50"
               >
                 <span className="grid size-15 place-items-center rounded-full bg-lime-400">
