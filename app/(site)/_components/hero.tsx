@@ -78,7 +78,7 @@ export function Hero() {
             style={{ left: 431, top: 0 }}
           />
 
-          {ornaments.map((o) => (
+          {ornaments.map((o, i) => (
             <Image
               key={o.name}
               src={`/images/ornaments/${o.name}.png`}
@@ -86,8 +86,14 @@ export function Hero() {
               width={780}
               height={780}
               sizes={`${o.width}px`}
-              className="absolute hidden h-auto md:block"
-              style={{ left: o.left, top: o.top, width: o.width }}
+              className="absolute hidden h-auto animate-float motion-reduce:animate-none md:block"
+              style={{
+                left: o.left,
+                top: o.top,
+                width: o.width,
+                animationDuration: `${5 + (i % 3)}s`,
+                animationDelay: `${i * -0.8}s`,
+              }}
             />
           ))}
 
