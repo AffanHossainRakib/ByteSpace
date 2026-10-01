@@ -1,6 +1,6 @@
 "use server";
 
-import { isEmail } from "@/lib/validation";
+import { emailSchema } from "@/lib/validation";
 
 export type NewsletterState = {
   status: "idle" | "success" | "error";
@@ -11,12 +11,9 @@ export async function subscribe(
   _prev: NewsletterState,
   formData: FormData,
 ): Promise<NewsletterState> {
-  const email = String(formData.get("email") ?? "").trim();
-  if (!isEmail(email)) {
-    return {
-      status: "error",
-      message: "Please enter a valid email address.",
-    };
+  const result = emailSchema.safeParse(formData.get("email") ?? "");
+  if (!result.success) {
+    return { status: "error", message: result.error.issues[0].message };
   }
   return {
     status: "success",
