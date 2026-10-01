@@ -13,11 +13,17 @@ import {
   withParams,
   type CourseParams,
 } from "@/lib/course-filters";
-import { ToolbarMenu } from "./toolbar-menu";
+import { ToolbarMenu } from "@/components/toolbar-menu";
 
 type Key = "rating" | "level" | "category" | "sort";
 
-export function CourseToolbar({ params }: { params: CourseParams }) {
+export function CourseToolbar({
+  path,
+  params,
+}: {
+  path: string;
+  params: CourseParams;
+}) {
   const menu = (
     key: Key,
     label: string,
@@ -32,14 +38,14 @@ export function CourseToolbar({ params }: { params: CourseParams }) {
         ? [
             {
               label: allLabel,
-              href: withParams("/courses", params, { [key]: undefined }),
+              href: withParams(path, params, { [key]: undefined }),
               active: !active,
             },
           ]
         : []),
       ...options.map((o) => ({
         label: o.label,
-        href: withParams("/courses", params, { [key]: o.value }),
+        href: withParams(path, params, { [key]: o.value }),
         active:
           o.value === params[key] ||
           (key === "sort" && !params.sort && o.value === "relevant"),

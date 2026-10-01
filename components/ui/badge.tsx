@@ -28,6 +28,7 @@ const badgeVariants = cva(
         chip: "h-auto border-0 px-3 py-1.5 type-label-xs [&>svg]:size-5!",
         md: "h-auto gap-1 px-4 py-3 text-base type-label-m [&>svg]:size-6!",
         pill: "h-auto gap-2 px-6 py-2 text-base type-label-m [&>svg]:size-6!",
+        lg: "h-auto gap-2 px-6 py-3 text-lg type-label-l",
       },
     },
     defaultVariants: {

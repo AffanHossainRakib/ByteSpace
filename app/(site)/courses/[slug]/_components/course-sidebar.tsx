@@ -91,7 +91,6 @@ export function CourseSidebar({ course }: { course: Course }) {
         <p className="type-body-m text-gray-700">{d.pitch}</p>
         <Link
           href="/creators/purepearl-studio"
-          prefetch={false}
           className={cn(
             badgeVariants({ variant: "outline" }),
             "h-auto w-fit bg-white px-4 py-2 text-sm type-label-s text-gray-950 hover:bg-gray-50",

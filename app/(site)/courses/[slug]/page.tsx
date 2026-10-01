@@ -67,7 +67,6 @@ export default async function CoursePage({
                 by{" "}
                 <Link
                   href="/creators/purepearl-studio"
-                  prefetch={false}
                   className="focus-on-blue rounded-sm text-lime-400 hover:underline"
                 >
                   {course.creator}

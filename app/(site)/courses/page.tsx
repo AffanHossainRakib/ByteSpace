@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CourseGrid } from "@/components/course-grid";
+import { CourseToolbar } from "@/components/course-toolbar";
+import { Pagination } from "@/components/pagination";
 import { SearchBar } from "@/components/search-bar";
 import { Button } from "@/components/ui/button";
 import { courses } from "@/config/courses";
@@ -11,8 +13,6 @@ import {
   withParams,
 } from "@/lib/course-filters";
 import { CategoryPills } from "./_components/category-pills";
-import { CourseToolbar } from "./_components/course-toolbar";
-import { Pagination } from "./_components/pagination";
 import { ScopeSelect } from "./_components/scope-select";
 
 const title = "Find your next course";
@@ -60,7 +60,7 @@ export default async function CoursesPage({
 
       <div className="container-page flex flex-col gap-8 py-12 md:py-18">
         <h2 className="sr-only">Courses</h2>
-        <CourseToolbar params={params} />
+        <CourseToolbar path="/courses" params={params} />
         <CategoryPills params={params} />
 
         <div className="flex h-5.5 items-center justify-between gap-4 type-body-s">
