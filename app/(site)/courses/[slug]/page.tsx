@@ -103,7 +103,7 @@ export default async function CoursePage({
       </section>
 
       <div className="container-page grid grid-cols-[minmax(0,1fr)] gap-10 pt-8 pb-16 lg:grid-cols-[minmax(0,1fr)_412px] lg:gap-x-15.75 lg:pt-0 lg:pb-20">
-        <aside className="lg:sticky lg:top-24 lg:col-start-2 lg:row-start-1 lg:-mt-135.25 lg:self-start">
+        <aside className="lg:col-start-2 lg:row-start-1 lg:-mt-135.25 lg:self-start">
           <CourseSidebar course={course} />
         </aside>
         <div className="flex min-w-0 flex-col gap-10 lg:col-start-1 lg:row-start-1 lg:pt-15.75">
