@@ -4,6 +4,7 @@ import { Features } from "./_components/features";
 import { Hero } from "./_components/hero";
 import { LearningPaths } from "./_components/learning-paths";
 import { Partners } from "./_components/partners";
+import { Testimonials } from "./_components/testimonials";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <LearningPaths />
       <Features />
       <CreatorCta />
+      <Testimonials />
     </main>
   );
 }
