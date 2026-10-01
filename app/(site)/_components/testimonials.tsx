@@ -75,12 +75,12 @@ export function Testimonials() {
 
         <ul
           aria-label="Testimonials"
-          className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:items-start md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:gap-10"
+          className="reveal no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:items-start md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:gap-10"
         >
           {testimonials.map(({ name, role, avatar, quote }) => (
             <li
               key={name}
-              className="reveal w-[85%] shrink-0 snap-start md:w-auto"
+              className="w-[85%] shrink-0 snap-start md:w-auto"
             >
               <figure className="flex h-full flex-col gap-6 rounded-3xl bg-white p-6">
                 <Image
