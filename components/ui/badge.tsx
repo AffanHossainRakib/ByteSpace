@@ -21,11 +21,13 @@ const badgeVariants = cva(
         gray: "bg-gray-50 text-gray-700",
         glass: "bg-[#f6f6f6]/60 text-gray-700 backdrop-blur-sm",
         lime: "bg-lime-400 text-gray-950",
+        white: "bg-white text-gray-950",
       },
       size: {
         default: "",
         chip: "h-auto border-0 px-3 py-1.5 type-label-xs [&>svg]:size-5!",
         md: "h-auto gap-1 px-4 py-3 text-base type-label-m [&>svg]:size-6!",
+        pill: "h-auto gap-2 px-6 py-2 text-base type-label-m [&>svg]:size-6!",
       },
     },
     defaultVariants: {

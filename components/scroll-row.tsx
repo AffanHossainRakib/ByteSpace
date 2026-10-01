@@ -64,7 +64,10 @@ export function ScrollRow({
       <div
         ref={row}
         onScroll={updateEdges}
-        className={cn("no-scrollbar overflow-x-auto pb-1", rowClassName)}
+        className={cn(
+          "no-scrollbar relative overflow-x-auto pb-1",
+          rowClassName,
+        )}
       >
         {children}
       </div>

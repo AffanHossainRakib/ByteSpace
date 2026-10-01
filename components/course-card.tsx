@@ -51,7 +51,6 @@ export function CourseCard({
             <h3 className="truncate type-heading-xs text-gray-950">
               <Link
                 href={`/courses/${course.slug}`}
-                prefetch={false}
                 className="after:absolute after:inset-0 after:rounded-3xl"
               >
                 {course.title}
