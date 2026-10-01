@@ -23,11 +23,13 @@ export function AuthAside({
         <CourseCard
           course={courses[1]}
           badgeTone="dark"
+          preload
           className="absolute top-22.25 left-6.25 w-93.25"
         />
         <CourseCard
           course={courses[2]}
           badgeTone="dark"
+          preload
           className="absolute top-0 left-34 w-93.25"
         />
         <HappyStudentsCard

@@ -83,7 +83,7 @@ export default async function CoursesPage({
         </div>
 
         {items.length ? (
-          <CourseGrid courses={items} />
+          <CourseGrid courses={items} preloadFirst />
         ) : (
           <div className="flex flex-col items-center gap-5 rounded-3xl bg-gray-50 p-10 text-center">
             <p className="type-body-l text-gray-700">

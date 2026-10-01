@@ -9,10 +9,12 @@ import { cn } from "@/lib/utils";
 export function CourseCard({
   course,
   badgeTone = "lime",
+  preload,
   className,
 }: {
   course: Course;
   badgeTone?: "lime" | "dark";
+  preload?: boolean;
   className?: string;
 }) {
   return (
@@ -28,6 +30,7 @@ export function CourseCard({
           alt=""
           width={341}
           height={195}
+          preload={preload}
           className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <ul className="absolute inset-x-3 bottom-4 flex flex-wrap gap-3">

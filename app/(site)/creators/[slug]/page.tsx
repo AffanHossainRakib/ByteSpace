@@ -119,7 +119,7 @@ export default async function CreatorPage({
         <h2 className="sr-only">Courses by {creator.name}</h2>
         <CourseToolbar path={path} params={query} />
         {items.length ? (
-          <CourseGrid courses={items} />
+          <CourseGrid courses={items} preloadFirst />
         ) : (
           <div className="flex flex-col items-center gap-5 rounded-3xl bg-gray-50 p-10 text-center">
             <p className="type-body-l text-gray-700">
